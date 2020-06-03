@@ -1,0 +1,50 @@
+{
+  "name": "extension-sample",
+  "version": "1.0.0",
+  "description": "A sample iModel.js Extension",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/imodeljs/extension-sample"
+  },
+  "scripts": {
+    "prebuild": "npm run pseudolocalize && npm run copy:assets",
+    "build": "tsc 1>&2 && npm run build:extension",
+    "build:extension": "extension-webpack-tools build -s ./src/MyExtension.ts -o ./lib/extension --sourceMap",
+    "clean": "rimraf lib",
+    "copy:assets": "cpx \"./src/public/**/*\" ./lib/extension/",
+    "lint": "tslint -p . 1>&2",
+    "pseudolocalize": "betools pseudolocalize --englishDir=./src/public/locales/en --out=./lib/extension/locales/en-PSEUDO"
+  },
+  "keywords": [
+    "iModel",
+    "BIM",
+    "extension"
+  ],
+  "author": {
+    "name": "Bentley Systems, Inc.",
+    "url": "http://www.bentley.com"
+  },
+  "devDependencies": {
+    "@bentley/build-tools": "^2.0.0",
+    "@bentley/extension-webpack-tools": "^2.0.0",
+    "rimraf": "^3.0.2",
+    "tslint": "^5.11.0",
+    "tslint-etc": "^1.5.2",
+    "typescript": "~3.7.4"
+  },
+  "dependencies": {
+    "@bentley/bentleyjs-core": "^2.0.0",
+    "@bentley/geometry-core": "^2.0.0",
+    "@bentley/imodeljs-common": "^2.0.0",
+    "@bentley/imodeljs-i18n": "^2.0.0",
+    "@bentley/imodeljs-frontend": "^2.0.0",
+    "@bentley/imodeljs-quantity": "^2.0.0",
+    "@bentley/product-settings-client": "^2.0.0",
+    "@bentley/orbitgt-core": "^2.0.0",
+    "@bentley/ui-abstract": "^2.0.0",
+    "@bentley/webgl-compatibility": "^2.0.0"
+  }
+}
